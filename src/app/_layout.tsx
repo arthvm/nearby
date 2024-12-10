@@ -1,6 +1,7 @@
-import { colors } from "@/styles/colors";
+import { colors } from "@/styles/theme";
 import { Stack } from "expo-router";
 
+import { Loading } from "@/components/loading";
 import {
   Rubik_400Regular,
   Rubik_500Medium,
@@ -18,7 +19,7 @@ export default function Layout() {
   });
 
   if (!fontsLoaded) {
-    return;
+    return <Loading />;
   }
 
   return (
