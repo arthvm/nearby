@@ -7,41 +7,44 @@ import { Place, type PlaceProps } from "../place";
 import { s } from "./styles";
 
 type Props = {
-  data: PlaceProps[];
+	data: PlaceProps[];
 };
 
+const topInset = 128;
+
 export function Places({ data }: Props) {
-  const dimensions = useWindowDimensions();
-  const bottomSheetRef = useRef<BottomSheet>(null);
+	const dimensions = useWindowDimensions();
+	const bottomSheetRef = useRef<BottomSheet>(null);
 
-  const snapPoints = {
-    min: 278,
-    max: dimensions.height - 128,
-  };
+	const snapPoints = {
+		min: 278,
+		max: dimensions.height - topInset,
+	};
 
-  return (
-    <BottomSheet
-      ref={bottomSheetRef}
-      snapPoints={[snapPoints.min, snapPoints.max]}
-      handleIndicatorStyle={s.indicator}
-      backgroundStyle={s.container}
-      enableOverDrag={false}
-    >
-      <BottomSheetFlatList
-        data={data}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <Place
-            data={item}
-            onPress={() => router.navigate(`/market/${item.id}`)}
-          />
-        )}
-        contentContainerStyle={s.content}
-        ListHeaderComponent={() => (
-          <Text style={s.title}>Explore locais perto de você</Text>
-        )}
-        showsVerticalScrollIndicator={false}
-      />
-    </BottomSheet>
-  );
+	return (
+		<BottomSheet
+			ref={bottomSheetRef}
+			snapPoints={[snapPoints.min, snapPoints.max]}
+			handleIndicatorStyle={s.indicator}
+			backgroundStyle={s.container}
+			enableOverDrag={false}
+			topInset={128}
+		>
+			<BottomSheetFlatList
+				data={data}
+				keyExtractor={(item) => item.id}
+				renderItem={({ item }) => (
+					<Place
+						data={item}
+						onPress={() => router.navigate(`/market/${item.id}`)}
+					/>
+				)}
+				contentContainerStyle={s.content}
+				ListHeaderComponent={() => (
+					<Text style={s.title}>Explore locais perto de você</Text>
+				)}
+				showsVerticalScrollIndicator={false}
+			/>
+		</BottomSheet>
+	);
 }
