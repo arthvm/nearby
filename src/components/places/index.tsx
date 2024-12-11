@@ -43,6 +43,7 @@ export function Places({ data }: Props) {
 				ListHeaderComponent={() => (
 					<Text style={s.title}>Explore locais perto de você</Text>
 				)}
+        stickyHeaderIndices={[0]}
 				showsVerticalScrollIndicator={false}
 			/>
 		</BottomSheet>
